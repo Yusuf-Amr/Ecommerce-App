@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "150112029002",
+    "project_id": "shopper-e8410",
+    "storage_bucket": "shopper-e8410.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150112029002:android:4b42f170df1eabf7a4d9b3",
+        "android_client_info": {
+          "package_name": "com.example.shopper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150112029002-kurl7d74l48v2armrgl1958j63a9d9v4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shopper",
+            "certificate_hash": "3e0ad857fcf706ec9a811ab2cf618c13ecc01613"
+          }
+        },
+        {
+          "client_id": "150112029002-op4cls4jrl410l8ql85e2q9b5oisdi95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD-CmbWY827a-llIdBvY2k47ELWFtf2Lk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150112029002-op4cls4jrl410l8ql85e2q9b5oisdi95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
