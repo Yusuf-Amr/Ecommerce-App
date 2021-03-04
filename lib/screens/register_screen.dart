@@ -1,10 +1,9 @@
-import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-import 'package:shopper/provider/model_hud.dart';
+import 'package:shopper/provider/modal_hud.dart';
+import 'package:shopper/screens/home_page.dart';
 import 'package:shopper/screens/login_screen.dart';
 import 'package:shopper/services/auth.dart';
 import 'package:shopper/widgets/custom_elevated_button.dart';
@@ -23,7 +22,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ModalProgressHUD(
-        inAsyncCall: Provider.of<ModelHud>(context).isLoading,
+        inAsyncCall: Provider.of<ModalHud>(context).isLoading,
         child: Form(
           key: _globalKey,
           child: SingleChildScrollView(
@@ -117,7 +116,7 @@ class RegisterScreen extends StatelessWidget {
                             Builder(
                               builder: (context) => CustomElevatedButton(
                                 onPressed: () async {
-                                  final modelHud = Provider.of<ModelHud>(
+                                  final modelHud = Provider.of<ModalHud>(
                                       context,
                                       listen: false);
                                   modelHud.changeIsLoading(true);
@@ -128,7 +127,7 @@ class RegisterScreen extends StatelessWidget {
                                           _email, _password);
                                       modelHud.changeIsLoading(false);
                                       Navigator.pushNamed(
-                                          context, LoginScreen.id);
+                                          context, HomePage.id);
                                     } on FirebaseAuthException catch (e) {
                                       modelHud.changeIsLoading(false);
                                       ScaffoldMessenger.of(context)

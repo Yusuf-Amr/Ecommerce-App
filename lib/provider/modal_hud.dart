@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class ModelHud extends ChangeNotifier {
+class ModalHud extends ChangeNotifier {
   bool isLoading = false;
   changeIsLoading(bool value) {
     isLoading = value;

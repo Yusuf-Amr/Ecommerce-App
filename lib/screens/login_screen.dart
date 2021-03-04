@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:shopper/provider/model_hud.dart';
+import 'package:shopper/provider/modal_hud.dart';
+import 'package:shopper/screens/admin_page.dart';
+import 'package:shopper/screens/home_page.dart';
 import 'package:shopper/screens/register_screen.dart';
 import 'package:shopper/widgets/custom_elevated_button.dart';
 import 'package:shopper/widgets/custom_text.dart';
@@ -16,11 +17,13 @@ class LoginScreen extends StatelessWidget {
   static String id = 'Loginscreen';
   String _email, _password;
   final _auth = Auth();
+  final adminEmail = 'admin@gmail.com';
+  final adminPassword = 'admin123';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ModalProgressHUD(
-        inAsyncCall: Provider.of<ModelHud>(context).isLoading,
+        inAsyncCall: Provider.of<ModalHud>(context).isLoading,
         child: Form(
           key: _globalKey,
           child: SingleChildScrollView(
@@ -111,30 +114,8 @@ class LoginScreen extends StatelessWidget {
                             ),
                             Builder(
                               builder: (context) => CustomElevatedButton(
-                                onPressed: () async {
-                                  final modelHud = Provider.of<ModelHud>(
-                                      context,
-                                      listen: false);
-                                  modelHud.changeIsLoading(true);
-
-                                  if (_globalKey.currentState.validate()) {
-                                    _globalKey.currentState.save();
-                                    try {
-                                      final result =
-                                          await _auth.login(_email, _password);
-                                      modelHud.changeIsLoading(false);
-
-                                      Navigator.pushNamed(
-                                          context, LoginScreen.id);
-                                    } on FirebaseAuthException catch (e) {
-                                      modelHud.changeIsLoading(false);
-
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                              content: Text(e.message)));
-                                    }
-                                  }
-                                  modelHud.changeIsLoading(false);
+                                onPressed: () {
+                                  _validate(context);
                                 },
                                 text: 'Login',
                               ),
@@ -172,5 +153,28 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _validate(BuildContext context) async {
+    final modalHud = Provider.of<ModalHud>(context, listen: false);
+    modalHud.changeIsLoading(true);
+
+    if (_globalKey.currentState.validate()) {
+      _globalKey.currentState.save();
+      try {
+        if (_email == adminEmail && _password == adminPassword) {
+          await _auth.login(_email, _password);
+          Navigator.pushNamed(context, AdminPage.id);
+        } else {
+          await _auth.login(_email, _password);
+          Navigator.pushNamed(context, HomePage.id);
+        }
+      } on FirebaseAuthException catch (error) {
+        modalHud.changeIsLoading(false);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(error.message)));
+      }
+    }
+    modalHud.changeIsLoading(false);
   }
 }
