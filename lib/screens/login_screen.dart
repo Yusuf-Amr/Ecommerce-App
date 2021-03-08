@@ -43,11 +43,11 @@ class LoginScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 36, horizontal: 24),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           CustomText(
-                              text: "Shoppers",
+                              text: "ShopLovers",
                               color: Colors.white,
                               fontSize: 35,
                               fontFamily: 'EagleLake'),

@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -126,8 +125,7 @@ class RegisterScreen extends StatelessWidget {
                                       final result = await _auth.register(
                                           _email, _password);
                                       modelHud.changeIsLoading(false);
-                                      Navigator.pushNamed(
-                                          context, HomePage.id);
+                                      Navigator.pushNamed(context, HomePage.id);
                                     } on FirebaseAuthException catch (e) {
                                       modelHud.changeIsLoading(false);
                                       ScaffoldMessenger.of(context)
@@ -144,7 +142,7 @@ class RegisterScreen extends StatelessWidget {
                               height: 20,
                             ),
                             Container(
-                              width: double.infinity,
+                              width: 300,
                               child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.pushNamed(context, LoginScreen.id);

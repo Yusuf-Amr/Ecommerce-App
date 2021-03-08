@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shopper/provider/modal_hud.dart';
+import 'package:shopper/screens/add_product.dart';
 import 'package:shopper/screens/admin_page.dart';
+import 'package:shopper/screens/edit_product.dart';
 import 'package:shopper/screens/home_page.dart';
 import 'package:shopper/screens/login_screen.dart';
 import 'package:shopper/screens/register_screen.dart';
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
           RegisterScreen.id: (context) => RegisterScreen(),
           AdminPage.id: (context) => AdminPage(),
           HomePage.id: (context) => HomePage(),
+          AddProduct.id: (context) => AddProduct(),
+          EditProduct.id: (context) => EditProduct(),
         },
       ),
     );
