@@ -4,10 +4,11 @@ import 'package:shopper/models/product.dart';
 import 'package:shopper/services/store.dart';
 import 'package:shopper/widgets/custom_elevated_button.dart';
 import 'package:shopper/widgets/custom_text_form_field.dart';
+
 //ignore: must_be_immutable
 class AddProduct extends StatelessWidget {
   static String id = 'Add Product';
-   String _productName,
+  String _productName,
       _productPrice,
       _productDescription,
       _productCategory,
@@ -57,6 +58,7 @@ class AddProduct extends StatelessWidget {
               },
               hintText: 'Product Location',
             ),
+           
             SizedBox(
               height: 20,
             ),

@@ -17,7 +17,7 @@ class AdminPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, AddProduct.id);
               },
-              text: 'Add Prodect',
+              text: 'Add Product',
             ),
             SizedBox(
               height: 20,
