@@ -4,6 +4,7 @@ import 'package:shopper/provider/modal_hud.dart';
 import 'package:shopper/screens/add_product.dart';
 import 'package:shopper/screens/admin_page.dart';
 import 'package:shopper/screens/edit_product.dart';
+import 'package:shopper/screens/manage_product.dart';
 import 'package:shopper/screens/home_page.dart';
 import 'package:shopper/screens/login_screen.dart';
 import 'package:shopper/screens/register_screen.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           AdminPage.id: (context) => AdminPage(),
           HomePage.id: (context) => HomePage(),
           AddProduct.id: (context) => AddProduct(),
+          ManageProduct.id: (context) => ManageProduct(),
           EditProduct.id: (context) => EditProduct(),
         },
       ),

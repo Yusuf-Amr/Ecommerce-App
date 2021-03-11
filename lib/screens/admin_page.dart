@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shopper/screens/add_product.dart';
-import 'package:shopper/screens/edit_product.dart';
+import 'package:shopper/screens/manage_product.dart';
 import 'package:shopper/widgets/custom_elevated_button.dart';
 
 class AdminPage extends StatelessWidget {
@@ -24,9 +24,9 @@ class AdminPage extends StatelessWidget {
             ),
             CustomElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, EditProduct.id);
+                  Navigator.pushNamed(context, ManageProduct.id);
                 },
-                text: 'Edit Product'),
+                text: 'Manage Products'),
             SizedBox(
               height: 20,
             ),

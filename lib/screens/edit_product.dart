@@ -1,124 +1,96 @@
-import 'dart:ffi';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shopper/constants.dart';
 import 'package:shopper/models/product.dart';
 import 'package:shopper/services/store.dart';
+import 'package:shopper/widgets/custom_elevated_button.dart';
+import 'package:shopper/widgets/custom_text_form_field.dart';
 
-class EditProduct extends StatefulWidget {
-  static String id = 'EditProduct';
-
-  @override
-  _EditProductState createState() => _EditProductState();
-}
-
-class _EditProductState extends State<EditProduct> {
+class EditProduct extends StatelessWidget {
+  static String id = 'editProduct';
+  String _productName,
+      _productPrice,
+      _productDescription,
+      _productCategory,
+      _productLocation;
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final _store = Store();
 
   @override
   Widget build(BuildContext context) {
+    Product product = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot>(
-        stream: _store.loadProduct(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<Product> products = [];
-            for (var doc in snapshot.data.docs) {
-              var data = doc.data();
-              products.add(Product(
-                pPrice: data[kProductPrice],
-                pDescription: data[kProductDescription],
-                pCategory: data[kProductCategory],
-                pName: data[kProductName],
-                pLocation: data[kProductLocation],
-              ));
-            }
-
-            return GridView.builder(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: GestureDetector(
-                  onTapUp: (details) {
-                    double dx = details.globalPosition.dx;
-                    double dy = details.globalPosition.dy;
-                    double dx2 = MediaQuery.of(context).size.width - dx;
-                    double dy2 = MediaQuery.of(context).size.height - dy;
-
-                    showMenu(
-                        context: context,
-                        position: RelativeRect.fromLTRB(dx, dy, dx2, dy2),
-                        items: [
-                          CustomPopupMenuItem(
-                            child: Text('Edit'),
-                          ),
-                          CustomPopupMenuItem(
-                            child: Text('Delete'),
-                          ),
-                        ]);
+      body: Form(
+        key: _globalKey,
+        child: ListView(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 2,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomTextFormField(
+                  onClick: (value) {
+                    _productName = value;
                   },
-                  child: Stack(children: [
-                    Positioned.fill(
-                      child: Image(
-                          fit: BoxFit.fill,
-                          image: AssetImage(products[index].pLocation)),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      child: Opacity(
-                        opacity: 0.6,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 60,
-                          color: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  (products[index].pName),
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(('\$ ${products[index].pPrice}')),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]),
+                  hintText: 'Product Name',
                 ),
-              ),
-              itemCount: products.length,
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
+                SizedBox(height: 10),
+                CustomTextFormField(
+                  onClick: (value) {
+                    _productPrice = value;
+                  },
+                  hintText: 'Product Price',
+                ),
+                SizedBox(height: 10),
+                CustomTextFormField(
+                  onClick: (value) {
+                    _productDescription = value;
+                  },
+                  hintText: 'Product Description',
+                ),
+                SizedBox(height: 10),
+                CustomTextFormField(
+                  onClick: (value) {
+                    _productCategory = value;
+                  },
+                  hintText: 'Product Category',
+                ),
+                SizedBox(height: 10),
+                CustomTextFormField(
+                  onClick: (value) {
+                    _productLocation = value;
+                  },
+                  hintText: 'Product Location',
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                CustomElevatedButton(
+                  text: 'Edit Product',
+                  onPressed: () {
+                    if (_globalKey.currentState.validate()) {
+                      _globalKey.currentState.save();
+
+                      _store.editProduct(
+                          ({
+                            kProductName: _productName,
+                            kProductPrice: _productPrice,
+                            kProductDescription: _productDescription,
+                            kProductCategory: _productCategory,
+                            kProductLocation: _productLocation,
+                          }),
+                          product.pId);
+                    }
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
-}
-
-//override popupMenuItem method to control handle tap to be able to edit and delete
-class CustomPopupMenuItem<T> extends PopupMenuItem<T> {
-  final Widget child;
-
-  CustomPopupMenuItem({@required this.child}) : super(child: child);
-
-  @override
-  PopupMenuItemState<T, PopupMenuItem<T>> createState() {
-    return CustomPopupItemState();
-  }
-}
-
-class CustomPopupItemState<T, PopMenuItem>
-    extends PopupMenuItemState<T, CustomPopupMenuItem<T>> {
-  @override
-  void handleTap() {}
 }
