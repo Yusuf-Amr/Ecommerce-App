@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shopper/constants.dart';
 import 'package:shopper/provider/modal_hud.dart';
 import 'package:shopper/screens/home_page.dart';
 import 'package:shopper/screens/login_screen.dart';
@@ -30,7 +31,7 @@ class RegisterScreen extends StatelessWidget {
                 maxHeight: MediaQuery.of(context).size.height,
                 maxWidth: MediaQuery.of(context).size.width,
               ),
-              color: Color(0xFF141414),
+              color: Color(kPurpleColor),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -148,7 +149,7 @@ class RegisterScreen extends StatelessWidget {
                                   Navigator.pushNamed(context, LoginScreen.id);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    primary: Color(0xFF141414),
+                                    primary: Color(kPurpleColor),
                                     onPrimary: Colors.white),
                                 child: Padding(
                                   padding:

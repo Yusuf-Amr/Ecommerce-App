@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shopper/constants.dart';
 import 'package:shopper/provider/modal_hud.dart';
 import 'package:shopper/screens/admin_page.dart';
 import 'package:shopper/screens/home_page.dart';
@@ -32,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                 maxHeight: MediaQuery.of(context).size.height,
                 maxWidth: MediaQuery.of(context).size.width,
               ),
-              color: Color(0xFF141414),
+              color: Color(kPurpleColor),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,6 +137,7 @@ class LoginScreen extends StatelessWidget {
                                   },
                                   child: Text('Let\'s Register',
                                       style: TextStyle(
+                                          color: Color(kPurpleColor),
                                           decoration: TextDecoration.underline,
                                           fontWeight: FontWeight.w800)),
                                 ),

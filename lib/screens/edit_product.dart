@@ -32,38 +32,38 @@ class EditProduct extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomTextFormField(
+                  initialValue: product.pName,
                   onClick: (value) {
                     _productName = value;
                   },
-                  hintText: 'Product Name',
                 ),
                 SizedBox(height: 10),
                 CustomTextFormField(
+                  initialValue: product.pPrice,
                   onClick: (value) {
                     _productPrice = value;
                   },
-                  hintText: 'Product Price',
                 ),
                 SizedBox(height: 10),
                 CustomTextFormField(
+                  initialValue: product.pDescription,
                   onClick: (value) {
                     _productDescription = value;
                   },
-                  hintText: 'Product Description',
                 ),
                 SizedBox(height: 10),
                 CustomTextFormField(
+                  initialValue: product.pCategory,
                   onClick: (value) {
                     _productCategory = value;
                   },
-                  hintText: 'Product Category',
                 ),
                 SizedBox(height: 10),
                 CustomTextFormField(
+                  initialValue: product.pLocation,
                   onClick: (value) {
                     _productLocation = value;
                   },
-                  hintText: 'Product Location',
                 ),
                 SizedBox(
                   height: 20,

@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData iconType;
   final bool obsecureText;
   final Function onClick;
+  String initialValue;
   String _errorMessage(String str) {
     switch (hintText) {
       case 'Email':
@@ -22,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
     this.iconType,
     this.obsecureText = false,
     @required this.onClick,
+    this.initialValue,
   });
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
           //ignore return message
         }
       },
+      initialValue: initialValue,
       onSaved: onClick,
       obscureText: obsecureText,
       decoration: InputDecoration(

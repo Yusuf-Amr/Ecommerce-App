@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shopper/constants.dart';
 import 'package:shopper/widgets/custom_text.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class CustomElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-            primary: Color(0xFF141414), onPrimary: Colors.white),
+            primary: Color(kPurpleColor), onPrimary: Colors.white),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 14),
           child: CustomText(text: text),
