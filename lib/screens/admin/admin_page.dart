@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shopper/screens/add_product.dart';
-import 'package:shopper/screens/manage_product.dart';
+import 'package:shopper/screens/admin/add_product.dart';
+import 'package:shopper/screens/admin/manage_product.dart';
 import 'package:shopper/widgets/custom_elevated_button.dart';
 
 class AdminPage extends StatelessWidget {

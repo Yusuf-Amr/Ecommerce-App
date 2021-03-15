@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shopper/constants.dart';
 import 'package:shopper/models/product.dart';
+import 'package:shopper/screens/user/productinfo.dart';
 import 'package:shopper/services/auth.dart';
+import 'package:shopper/services/functions/get_product_bycategory.dart';
 import 'package:shopper/services/store.dart';
 import 'package:shopper/widgets/custom_text.dart';
+import 'package:shopper/widgets/product_view.dart';
 
 class HomePage extends StatefulWidget {
   static String id = 'HomePage';
@@ -20,7 +23,9 @@ class _HomePageState extends State<HomePage> {
   final _auth = Auth();
   User _loggedUser;
   int _tabBarIndex = 0;
+  int _bottomBarIndex = 0;
   final _store = Store();
+  List<Product> _products;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -28,8 +33,28 @@ class _HomePageState extends State<HomePage> {
         DefaultTabController(
           length: 4,
           child: Scaffold(
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _bottomBarIndex,
+              fixedColor: Color(kPurpleColor),
+              onTap: (value) {
+                setState(() {
+                  _bottomBarIndex = value;
+                });
+              },
+              items: [
+                BottomNavigationBarItem(
+                    label: 'Profile', icon: Icon(Icons.person)),
+                BottomNavigationBarItem(
+                    label: 'Profile', icon: Icon(Icons.person)),
+                BottomNavigationBarItem(
+                    label: 'Profile', icon: Icon(Icons.person)),
+                BottomNavigationBarItem(
+                    label: 'Profile', icon: Icon(Icons.person)),
+              ],
+            ),
             appBar: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: Color(kPurpleColor),
               elevation: 0,
               bottom: TabBar(
                 labelPadding: EdgeInsets.zero,
@@ -41,26 +66,22 @@ class _HomePageState extends State<HomePage> {
                 },
                 tabs: <Widget>[
                   CustomText(
-                    color:
-                        _tabBarIndex == 0 ? Color(kPurpleColor) : Colors.black,
+                    color: _tabBarIndex == 0 ? Colors.white : Colors.white,
                     text: 'Jackets',
                     fontSize: _tabBarIndex == 0 ? 16 : null,
                   ),
                   CustomText(
-                    color:
-                        _tabBarIndex == 1 ? Color(kPurpleColor) : Colors.black,
+                    color: _tabBarIndex == 1 ? Colors.black : Colors.white,
                     text: 'Trousers',
                     fontSize: _tabBarIndex == 1 ? 16 : null,
                   ),
                   CustomText(
-                    color:
-                        _tabBarIndex == 2 ? Color(kPurpleColor) : Colors.black,
+                    color: _tabBarIndex == 2 ? Colors.black : Colors.white,
                     text: 'T-shirts',
                     fontSize: _tabBarIndex == 2 ? 16 : null,
                   ),
                   CustomText(
-                    color:
-                        _tabBarIndex == 3 ? Color(kPurpleColor) : Colors.black,
+                    color: _tabBarIndex == 3 ? Colors.black : Colors.white,
                     text: 'Shoes',
                     fontSize: _tabBarIndex == 3 ? 16 : null,
                   ),
@@ -70,33 +91,40 @@ class _HomePageState extends State<HomePage> {
             body: TabBarView(
               children: [
                 jacketView(),
-                CustomText(),
-                CustomText(),
-                CustomText(),
+                productView(kTrousers, _products),
+                productView(kT_shirts, _products),
+                productView(kShoes, _products),
               ],
             ),
           ),
         ),
         Material(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.08,
+          // child: Padding(
+          //   padding: EdgeInsets.symmetric(vertical: 20),
+          child: Container(
+            color: Color(kPurpleColor),
+            height: MediaQuery.of(context).size.height * 0.118,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
+                    color: Colors.white,
                     text: 'Discover'.toUpperCase(),
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
-                  Icon(Icons.shopping_cart)
+                  Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                  )
                 ],
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -127,43 +155,51 @@ class _HomePageState extends State<HomePage> {
               pLocation: data[kProductLocation],
             ));
           }
+          _products = [...products];
+          products.clear();
+          products = getProductByCategory(kJackets, _products);
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, childAspectRatio: 0.8),
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Stack(children: [
-                Positioned.fill(
-                  child: Image(
-                      fit: BoxFit.fill,
-                      image: AssetImage(products[index].pLocation)),
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: Opacity(
-                    opacity: 0.6,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 60,
-                      color: Colors.white,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              (products[index].pName),
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(('\$ ${products[index].pPrice}')),
-                          ],
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, ProductInfo.id,arguments: products[index]);
+                },
+                child: Stack(children: [
+                  Positioned.fill(
+                    child: Image(
+                        fit: BoxFit.fill,
+                        image: AssetImage(products[index].pLocation)),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: Opacity(
+                      opacity: 0.6,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 60,
+                        color: Colors.white,
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                (products[index].pName),
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(('\$ ${products[index].pPrice}')),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ]),
+                ]),
+              ),
             ),
             itemCount: products.length,
           );

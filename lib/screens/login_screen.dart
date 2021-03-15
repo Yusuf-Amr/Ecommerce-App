@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shopper/constants.dart';
 import 'package:shopper/provider/modal_hud.dart';
-import 'package:shopper/screens/admin_page.dart';
-import 'package:shopper/screens/home_page.dart';
+import 'package:shopper/screens/admin/admin_page.dart';
+import 'package:shopper/screens/user/home_page.dart';
 import 'package:shopper/screens/register_screen.dart';
 import 'package:shopper/widgets/custom_elevated_button.dart';
 import 'package:shopper/widgets/custom_text.dart';
@@ -42,26 +42,27 @@ class LoginScreen extends StatelessWidget {
                     flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 36, horizontal: 24),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CustomText(
-                              text: "ShopLovers",
-                              color: Colors.white,
-                              fontSize: 35,
-                              fontFamily: 'EagleLake'),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          CustomText(
-                              text: "Enter a beautiful world",
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontFamily: 'EagleLake'),
-                        ],
-                      ),
+                          vertical: 40, horizontal: 24),
+                      child: Image.asset('assets/logo/logo.png'),
+                      // child: Column(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   children: [
+                      //     CustomText(
+                      //         text: "ShopLovers",
+                      //         color: Colors.white,
+                      //         fontSize: 35,
+                      //         fontFamily: 'EagleLake'),
+                      //     SizedBox(
+                      //       height: 10,
+                      //     ),
+                      //     CustomText(
+                      //         text: "Enter a beautiful world",
+                      //         color: Colors.white,
+                      //         fontSize: 15,
+                      //         fontFamily: 'EagleLake'),
+                      //   ],
+                      // ),
                     ),
                   ),
                   Expanded(
@@ -165,10 +166,10 @@ class LoginScreen extends StatelessWidget {
       _globalKey.currentState.save();
       try {
         if (_email == adminEmail && _password == adminPassword) {
-          await _auth.login(_email, _password);
+          await _auth.login(_email.trim(), _password.trim());
           Navigator.pushNamed(context, AdminPage.id);
         } else {
-          await _auth.login(_email, _password);
+          await _auth.login(_email.trim(), _password.trim());
           Navigator.pushNamed(context, HomePage.id);
         }
       } on FirebaseAuthException catch (error) {

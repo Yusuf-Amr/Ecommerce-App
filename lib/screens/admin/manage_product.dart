@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:shopper/constants.dart';
 import 'package:shopper/models/product.dart';
-import 'package:shopper/screens/edit_product.dart';
+import 'package:shopper/screens/admin/edit_product.dart';
 import 'package:shopper/services/store.dart';
 
 class ManageProduct extends StatefulWidget {

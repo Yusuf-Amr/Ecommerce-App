@@ -5,3 +5,7 @@ const kProductLocation = 'productLocation';
 const kProductCategory = 'productCategory';
 const kProductCollections = 'products';
 const kPurpleColor = 0xFF5E40A4;
+const kJackets = 'Jackets';
+const kTrousers = 'Trousers';
+const kT_shirts = 'T-shirts';
+const kShoes = 'Shoes';

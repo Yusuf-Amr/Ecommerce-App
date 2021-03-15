@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shopper/constants.dart';
 import 'package:shopper/provider/modal_hud.dart';
-import 'package:shopper/screens/home_page.dart';
+import 'package:shopper/screens/user/home_page.dart';
 import 'package:shopper/screens/login_screen.dart';
 import 'package:shopper/services/auth.dart';
 import 'package:shopper/widgets/custom_elevated_button.dart';
@@ -40,27 +40,8 @@ class RegisterScreen extends StatelessWidget {
                     flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 36, horizontal: 24),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                              text: "Shoppers",
-                              color: Colors.white,
-                              fontSize: 35,
-                              fontFamily: 'EagleLake'),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          CustomText(
-                            text: "Enter a beautiful world",
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontFamily: 'EagleLake',
-                          ),
-                        ],
-                      ),
+                          vertical: 40, horizontal: 24),
+                      child: Image.asset('assets/logo/logo.png'),
                     ),
                   ),
                   Expanded(
