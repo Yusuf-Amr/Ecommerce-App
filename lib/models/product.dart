@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+
 
 class Product {
   String pId;
@@ -8,6 +7,7 @@ class Product {
   String pLocation;
   String pDescription;
   String pCategory;
+  double pQuantity;
   Product({
     this.pId,
     this.pName,
@@ -15,5 +15,6 @@ class Product {
     this.pLocation,
     this.pDescription,
     this.pCategory,
+    this.pQuantity,
   });
 }

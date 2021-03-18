@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shopper/constants.dart';
 import 'package:shopper/models/product.dart';
+import 'package:shopper/screens/user/cart_screen.dart';
 import 'package:shopper/screens/user/productinfo.dart';
 import 'package:shopper/services/auth.dart';
 import 'package:shopper/services/functions/get_product_bycategory.dart';
@@ -116,9 +117,14 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
-                  Icon(
-                    Icons.shopping_cart,
-                    color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, CartScreen.id);
+                    },
+                    child: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                    ),
                   )
                 ],
               ),
@@ -165,7 +171,8 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, ProductInfo.id,arguments: products[index]);
+                  Navigator.pushNamed(context, ProductInfo.id,
+                      arguments: products[index]);
                 },
                 child: Stack(children: [
                   Positioned.fill(

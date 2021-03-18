@@ -6,6 +6,7 @@ import 'package:shopper/constants.dart';
 import 'package:shopper/models/product.dart';
 import 'package:shopper/screens/admin/edit_product.dart';
 import 'package:shopper/services/store.dart';
+import 'package:shopper/widgets/custom_menu.dart';
 
 class ManageProduct extends StatefulWidget {
   static String id = 'ManageProduct';
@@ -114,25 +115,4 @@ class _ManageProductState extends State<ManageProduct> {
   }
 }
 
-//override popupMenuItem method to control handle tap to be able to edit and delete
-class CustomPopupMenuItem<T> extends PopupMenuItem<T> {
-  final Widget child;
-  final Function onClick;
-  CustomPopupMenuItem({
-    @required this.child,
-    @required this.onClick,
-  }) : super(child: child);
 
-  @override
-  PopupMenuItemState<T, PopupMenuItem<T>> createState() {
-    return CustomPopupItemState();
-  }
-}
-
-class CustomPopupItemState<T, PopMenuItem>
-    extends PopupMenuItemState<T, CustomPopupMenuItem<T>> {
-  @override
-  void handleTap() {
-    widget.onClick();
-  }
-}

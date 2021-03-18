@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shopper/provider/cart_item.dart';
 import 'package:shopper/provider/modal_hud.dart';
 import 'package:shopper/screens/admin/add_product.dart';
 import 'package:shopper/screens/admin/admin_page.dart';
 import 'package:shopper/screens/admin/edit_product.dart';
 import 'package:shopper/screens/admin/manage_product.dart';
+import 'package:shopper/screens/user/cart_screen.dart';
 import 'package:shopper/screens/user/home_page.dart';
 import 'package:shopper/screens/login_screen.dart';
 import 'package:shopper/screens/register_screen.dart';
@@ -27,6 +29,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ModalHud>(
           create: (context) => ModalHud(),
         ),
+        ChangeNotifierProvider<CartItem>(
+          create: (context) => CartItem(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -40,6 +45,7 @@ class MyApp extends StatelessWidget {
           ManageProduct.id: (context) => ManageProduct(),
           EditProduct.id: (context) => EditProduct(),
           ProductInfo.id: (context) => ProductInfo(),
+          CartScreen.id: (context) => CartScreen(),
         },
       ),
     );

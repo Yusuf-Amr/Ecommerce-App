@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopper/constants.dart';
 import 'package:shopper/models/product.dart';
-import 'package:shopper/widgets/custom_elevated_button.dart';
+import 'package:shopper/provider/cart_item.dart';
+import 'package:shopper/screens/user/cart_screen.dart';
 import 'package:shopper/widgets/custom_text.dart';
 
 class ProductInfo extends StatefulWidget {
@@ -12,7 +14,7 @@ class ProductInfo extends StatefulWidget {
 }
 
 class _ProductInfoState extends State<ProductInfo> {
-  double _quantity = 0;
+  double _quantity = 1;
   @override
   Widget build(BuildContext context) {
     Product product = ModalRoute.of(context).settings.arguments;
@@ -32,13 +34,23 @@ class _ProductInfoState extends State<ProductInfo> {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.arrow_back_ios,
-                  color: Color(kPurpleColor),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Color(kPurpleColor),
+                  ),
                 ),
-                Icon(
-                  Icons.shopping_cart,
-                  color: Color(kPurpleColor),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, CartScreen.id);
+                  },
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Color(kPurpleColor),
+                  ),
                 )
               ],
             ),
@@ -74,14 +86,6 @@ class _ProductInfoState extends State<ProductInfo> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ]),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        CustomText(
-                          text: product.pDescription,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w900,
-                        ),
                         SizedBox(
                           height: 10,
                         ),
@@ -132,7 +136,18 @@ class _ProductInfoState extends State<ProductInfo> {
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        CustomText(
+                          text: product.pDescription,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w900,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                       ],
                     ),
                   ),
@@ -143,17 +158,21 @@ class _ProductInfoState extends State<ProductInfo> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.09,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    primary: Color(kPurpleColor), onPrimary: Colors.white),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 14,
-                  ),
-                  child: CustomText(
-                    text: 'Add to Cart',
-                    fontWeight: FontWeight.bold,
+              child: Builder(
+                builder: (context) => ElevatedButton(
+                  onPressed: () {
+                    addToCart(context, product);
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(kPurpleColor), onPrimary: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 14,
+                    ),
+                    child: CustomText(
+                      text: 'Add to Cart',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -176,5 +195,25 @@ class _ProductInfoState extends State<ProductInfo> {
     setState(() {
       _quantity++;
     });
+  }
+
+  void addToCart(context, product) {
+    CartItem cartItem = Provider.of<CartItem>(context, listen: false);
+    product.pQuantity = _quantity;
+    var productsInCart = cartItem.products;
+    bool exist = false;
+    for (var productInCart in productsInCart) {
+      if (productInCart.pName == product.pName) {
+        exist = true;
+      }
+    }
+    if (exist) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('you added this item before')));
+    } else {
+      cartItem.addProduct(product);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Added to Cart')));
+    }
   }
 }

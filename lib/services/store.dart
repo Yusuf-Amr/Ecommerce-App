@@ -23,7 +23,20 @@ class Store {
     _fireStore.collection(kProductCollections).doc(documentId).delete();
   }
 
-  editProduct(data,documentId) {
+  editProduct(data, documentId) {
     _fireStore.collection(kProductCollections).doc(documentId).update(data);
+  }
+
+  storeOrders(data, List<Product> products) {
+    var documentReference = _fireStore.collection(kOrders).doc();
+    documentReference.set(data);
+    for (var products in products) {
+      documentReference.collection(kOrderDetails).doc().set({
+        kProductName: products.pName,
+        kProductLocation: products.pLocation,
+        kProductPrice: products.pPrice,
+        kProductQuantity: products.pQuantity
+      });
+    }
   }
 }
