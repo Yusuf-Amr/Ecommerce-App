@@ -19,6 +19,18 @@ class Store {
     return _fireStore.collection(kProductCollections).snapshots();
   }
 
+  Stream<QuerySnapshot> loadOrders() {
+    return _fireStore.collection(kOrders).snapshots();
+  }
+
+  Stream<QuerySnapshot> loadOrdersDetails(documentId) {
+    return _fireStore
+        .collection(kOrders)
+        .doc(documentId)
+        .collection(kOrderDetails)
+        .snapshots();
+  }
+
   deleteProduct(documentId) {
     _fireStore.collection(kProductCollections).doc(documentId).delete();
   }
@@ -35,7 +47,8 @@ class Store {
         kProductName: products.pName,
         kProductLocation: products.pLocation,
         kProductPrice: products.pPrice,
-        kProductQuantity: products.pQuantity
+        kProductQuantity: products.pQuantity,
+        kProductCategory: products.pCategory
       });
     }
   }
