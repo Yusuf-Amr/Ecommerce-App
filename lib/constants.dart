@@ -14,3 +14,4 @@ const kOrderDetails = 'OrderDetails';
 const kTotalPrice = 'TotalPrice';
 const kAddress = 'Address';
 const kProductQuantity = 'ProductQuantity';
+const kKeepMeLoggedIn = 'KeepMeLoggedIn';

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopper/constants.dart';
 import 'package:shopper/provider/modal_hud.dart';
 import 'package:shopper/screens/admin/admin_page.dart';
@@ -13,13 +14,26 @@ import 'package:shopper/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
-  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+class LoginScreen extends StatefulWidget {
   static String id = 'Loginscreen';
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
   String _email, _password;
+
   final _auth = Auth();
+
   final adminEmail = 'admin@gmail.com';
+
   final adminPassword = 'admin123';
+
+  bool keepMeLoggedIn = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,25 +58,6 @@ class LoginScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 40, horizontal: 24),
                       child: Image.asset('assets/logo/logo.png'),
-                      // child: Column(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   crossAxisAlignment: CrossAxisAlignment.center,
-                      //   children: [
-                      //     CustomText(
-                      //         text: "ShopLovers",
-                      //         color: Colors.white,
-                      //         fontSize: 35,
-                      //         fontFamily: 'EagleLake'),
-                      //     SizedBox(
-                      //       height: 10,
-                      //     ),
-                      //     CustomText(
-                      //         text: "Enter a beautiful world",
-                      //         color: Colors.white,
-                      //         fontSize: 15,
-                      //         fontFamily: 'EagleLake'),
-                      //   ],
-                      // ),
                     ),
                   ),
                   Expanded(
@@ -103,20 +98,28 @@ class LoginScreen extends StatelessWidget {
                               height: 10,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                CustomText(
-                                  text: 'Forgot password?',
-                                  color: Colors.black,
-                                ),
+                                Text('Remember Me'),
+                                Checkbox(
+                                    checkColor: Color(kPurpleColor),
+                                    activeColor: Colors.white,
+                                    value: keepMeLoggedIn,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        keepMeLoggedIn = value;
+                                      });
+                                    }),
                               ],
                             ),
                             SizedBox(
-                              height: 50,
+                              height: 20,
                             ),
                             Builder(
                               builder: (context) => CustomElevatedButton(
                                 onPressed: () {
+                                  if (keepMeLoggedIn == true) {
+                                    keepUserLoggedIn();
+                                  }
                                   _validate(context);
                                 },
                                 text: 'Login',
@@ -179,5 +182,10 @@ class LoginScreen extends StatelessWidget {
       }
     }
     modalHud.changeIsLoading(false);
+  }
+
+  void keepUserLoggedIn() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool(kKeepMeLoggedIn, keepMeLoggedIn);
   }
 }

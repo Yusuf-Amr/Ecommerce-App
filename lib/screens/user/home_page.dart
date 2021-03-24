@@ -3,8 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopper/constants.dart';
 import 'package:shopper/models/product.dart';
+import 'package:shopper/screens/login_screen.dart';
 import 'package:shopper/screens/user/cart_screen.dart';
 import 'package:shopper/screens/user/productinfo.dart';
 import 'package:shopper/services/auth.dart';
@@ -39,7 +41,14 @@ class _HomePageState extends State<HomePage> {
               currentIndex: _bottomBarIndex,
               fixedColor: Color(kPurpleColor),
               onTap: (value) {
-                setState(() {
+                setState(() async {
+                  if (value == 2) {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    pref.clear();
+                    await _auth.SignOut();
+                    Navigator.popAndPushNamed(context, LoginScreen.id);
+                  }
                   _bottomBarIndex = value;
                 });
               },
@@ -49,9 +58,7 @@ class _HomePageState extends State<HomePage> {
                 BottomNavigationBarItem(
                     label: 'Profile', icon: Icon(Icons.person)),
                 BottomNavigationBarItem(
-                    label: 'Profile', icon: Icon(Icons.person)),
-                BottomNavigationBarItem(
-                    label: 'Profile', icon: Icon(Icons.person)),
+                    label: 'Sign Out', icon: Icon(Icons.close)),
               ],
             ),
             appBar: AppBar(
