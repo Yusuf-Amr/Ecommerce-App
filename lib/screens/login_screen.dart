@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       } on FirebaseAuthException catch (error) {
         modalHud.changeIsLoading(false);
-        ScaffoldMessenger.of(context)
+        Scaffold.of(context)
             .showSnackBar(SnackBar(content: Text(error.message)));
       }
     }

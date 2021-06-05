@@ -16,6 +16,11 @@ import 'package:shopper/widgets/custom_text.dart';
 import 'package:shopper/widgets/product_view.dart';
 
 class HomePage extends StatefulWidget {
+    final QueryDocumentSnapshot queryDocumentSnapshot;
+    const HomePage({
+    this.queryDocumentSnapshot,
+  });
+
   static String id = 'HomePage';
 
   @override
@@ -74,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 tabs: <Widget>[
                   CustomText(
-                    color: _tabBarIndex == 0 ? Colors.white : Colors.white,
+                    color: _tabBarIndex == 0 ? Colors.black : Colors.white,
                     text: 'Jackets',
                     fontSize: _tabBarIndex == 0 ? 16 : null,
                   ),
@@ -144,7 +149,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    getCurrenUser();
+     getCurrenUser();
   }
 
   getCurrenUser() async {
@@ -183,10 +188,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Stack(children: [
                   Positioned.fill(
-                    child: Image(
-                        fit: BoxFit.fill,
-                        image: AssetImage(products[index].pLocation)),
-                  ),
+                    child: Image.network(products[index].pLocation),),
                   Positioned(
                     bottom: 0,
                     child: Opacity(

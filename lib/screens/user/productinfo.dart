@@ -25,7 +25,7 @@ class _ProductInfoState extends State<ProductInfo> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child:
-                Image(fit: BoxFit.fill, image: AssetImage(product.pLocation))),
+                Image.network(product.pLocation),),
         Container(
           height: MediaQuery.of(context).size.height * 0.118,
           child: Padding(
@@ -208,11 +208,11 @@ class _ProductInfoState extends State<ProductInfo> {
       }
     }
     if (exist) {
-      ScaffoldMessenger.of(context)
+      Scaffold.of(context)
           .showSnackBar(SnackBar(content: Text('you added this item before')));
     } else {
       cartItem.addProduct(product);
-      ScaffoldMessenger.of(context)
+      Scaffold.of(context)
           .showSnackBar(SnackBar(content: Text('Added to Cart')));
     }
   }

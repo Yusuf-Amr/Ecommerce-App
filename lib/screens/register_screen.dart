@@ -110,7 +110,7 @@ class RegisterScreen extends StatelessWidget {
                                       Navigator.pushNamed(context, HomePage.id);
                                     } on FirebaseAuthException catch (e) {
                                       modelHud.changeIsLoading(false);
-                                      ScaffoldMessenger.of(context)
+                                      Scaffold.of(context)
                                           .showSnackBar(SnackBar(
                                               content: Text(e.message)));
                                     }
