@@ -4,8 +4,7 @@ A Full Flutter E-commerce clothes app with a backend using Firebase.
 
 ## Getting Started
 
-![1](https://user-images.githubusercontent.com/69325037/120926172-1dccd500-c6dc-11eb-96c7-1bfcdd6aa177.jpeg)
-![2](https://user-images.githubusercontent.com/69325037/120926280-874ce380-c6dc-11eb-8e27-0b014fa7826a.jpeg)
+![1](https://user-images.githubusercontent.com/69325037/120926172-1dccd500-c6dc-11eb-96c7-1bfcdd6aa177.jpeg) ![2](https://user-images.githubusercontent.com/69325037/120926280-874ce380-c6dc-11eb-8e27-0b014fa7826a.jpeg)
 ![3](https://user-images.githubusercontent.com/69325037/120926272-7f8d3f00-c6dc-11eb-9e72-8e25bd76026f.jpeg)
 ![4](https://user-images.githubusercontent.com/69325037/120926268-73a17d00-c6dc-11eb-827e-52816340d76f.jpeg)
 ![5](https://user-images.githubusercontent.com/69325037/120926261-6c7a6f00-c6dc-11eb-9d2b-3c1cf490f1b0.jpeg)
