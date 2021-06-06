@@ -56,7 +56,7 @@ class AddProduct extends StatelessWidget {
               onClick: (value) {
                 _productLocation = value;
               },
-              hintText: 'Product Location',
+              hintText: 'Product URL',
             ),
            
             SizedBox(

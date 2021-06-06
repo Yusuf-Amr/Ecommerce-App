@@ -72,10 +72,9 @@ class _ManageProductState extends State<ManageProduct> {
                   },
                   child: Stack(children: [
                     Positioned.fill(
-                      child: Image(
-                          fit: BoxFit.fill,
-                          image: AssetImage(products[index].pLocation)),
-                    ),
+                      child: 
+                          Image.network(products[index].pLocation)),
+                    
                     Positioned(
                       bottom: 0,
                       child: Opacity(

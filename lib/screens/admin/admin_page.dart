@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shopper/constants.dart';
 import 'package:shopper/screens/admin/add_product.dart';
 import 'package:shopper/screens/admin/manage_product.dart';
 import 'package:shopper/screens/admin/order_screen.dart';
@@ -10,6 +11,10 @@ class AdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(kPurpleColor),
+        title: Text('Admin Page'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -76,9 +76,9 @@ class CartScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 CircleAvatar(
+                                  backgroundColor: Color(kPurpleColor),
                                   radius: screenHeight * 0.15 / 2,
-                                  backgroundImage:
-                                      AssetImage(products[index].pLocation),
+                                  child: Image.network(products[index].pLocation),
                                 ),
                                 Expanded(
                                   child: Row(

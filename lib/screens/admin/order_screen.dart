@@ -43,6 +43,7 @@ class OrderScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            
                             Text(
                               'Total Price = \$ ${orders[index].totalPrice}',
                               style: TextStyle(
