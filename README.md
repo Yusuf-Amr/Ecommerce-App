@@ -1,6 +1,6 @@
 # shopper
 
-A Full Flutter E-commerce clothes app with backend using Firebase.
+A Full Flutter E-commerce clothes app with a backend using Firebase.
 
 ## Getting Started
 
