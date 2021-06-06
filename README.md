@@ -1,6 +1,6 @@
 # shopper
 
-A new Flutter project.
+A Full Flutter E-commerce clothes app with backend using Firebase.
 
 ## Getting Started
 
