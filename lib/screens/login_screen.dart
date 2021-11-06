@@ -28,9 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _auth = Auth();
 
-  final adminEmail = 'admin@gmail.com';
+  final adminEmail = 'Your Email';
 
-  final adminPassword = 'admin123';
+  final adminPassword = 'Your Password';
 
   bool keepMeLoggedIn = false;
 
